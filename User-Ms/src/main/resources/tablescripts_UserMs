@@ -1,0 +1,43 @@
+create schema userMs;
+use userMs;
+
+create table buyer(
+	buyer_id integer AUTO_INCREMENT,
+	name varchar(30) NOT NULL,
+	email_Id varchar(30) NOT NULL,
+	contact_number varchar(10) NOT NULL UNIQUE,
+	password varchar(70) NOT NULL,
+	is_privileged boolean ,
+	reward_points integer,
+	is_active boolean,
+	CONSTRAINT buyer_id_pk PRIMARY KEY(buyer_id)
+);
+
+insert into buyer values(1001,'Joey','joey@abc.com','9009009001','Joey@123',1,0,1);
+insert into buyer values(1002,'Monika','monika@abc.com','9009009002','Monika@123',1,10000,1);
+insert into buyer values(1003,'Arya','arya@abc.com','9009009003','Arya@123',0,50,1);
+insert into buyer values(1004,'Tyrion','tyrion@abc.com','9009009004','Tyrion@123',1,100,1);
+
+create table seller(
+	seller_id integer AUTO_INCREMENT,
+	name varchar(30) NOT NULL,
+	email_Id varchar(30) NOT NULL,
+	contact_number varchar(10) NOT NULL UNIQUE,
+	password varchar(70) NOT NULL,
+	is_active boolean,
+	CONSTRAINT seller_id_pk PRIMARY KEY(seller_id)
+);
+
+create table wishlist(
+	buyer_id integer,
+	prod_id integer,
+	CONSTRAINT wishlist_comp_pk PRIMARY KEY(buyer_id,prod_id)
+);
+
+create table cart(
+	buyer_id integer,
+	prod_id integer,
+	quantity integer,
+	CONSTRAINT cart_comp_pk PRIMARY KEY(buyer_id,prod_id)
+);
+

@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
+@Table(name="buyer")
 public class Buyer {
 	
 	@Id
@@ -12,7 +14,7 @@ public class Buyer {
 	private Integer buyerId;
 	private String name;
 	private String emailId;
-	private Long phoneNumber;
+	private String contactNumber;
 	private String password;
 	private Boolean isPriviliged;
 	private Float rewardPoints;
@@ -35,11 +37,12 @@ public class Buyer {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public Long getPhoneNumber() {
-		return phoneNumber;
+	
+	public String getContactNumber() {
+		return contactNumber;
 	}
-	public void setPhoneNumber(Long phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
 	}
 	public String getPassword() {
 		return password;
