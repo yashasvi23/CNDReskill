@@ -9,6 +9,7 @@ public interface UserService {
 	public String registerSeller(SellerDTO seller) throws UserMSException;
 	public BuyerDTO buyerLogin(String emailid,String password) throws  UserMSException;
 	public SellerDTO sellerLogin(String emailid,String password) throws  UserMSException;
-	
+	public void deleteBuyer(Integer buyerId)throws  UserMSException;
+	public void deleteSeller(Integer sellerId)throws  UserMSException;
 
 }

@@ -10,5 +10,7 @@ public interface SellerRepository extends CrudRepository<Seller , Integer>{
 	public Seller findByContactNumber(String contactNumber);
 	
 	public Seller findByEmailId(String emailId);
+	
+	
 
 }

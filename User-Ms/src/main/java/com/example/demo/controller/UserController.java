@@ -5,6 +5,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -66,6 +67,18 @@ public class UserController {
 			return new ResponseEntity<BuyerDTO>(buyerD,HttpStatus.OK);
 		
 		
+	}
+	@RequestMapping(value = "/buyer/{buyerId}" , method=RequestMethod.DELETE)
+	public ResponseEntity<String> deleteBuyer(@PathVariable Integer buyerId) throws UserMSException {
+		userService.deleteBuyer(buyerId);
+		String successMessage = environment.getProperty("UserController.DELETE_SUCCESS");
+		return new ResponseEntity<>(successMessage, HttpStatus.OK);
+	}
+	@RequestMapping(value = "/seller/{sellerId}" , method=RequestMethod.DELETE)
+	public ResponseEntity<String> deleteSeller(@PathVariable Integer sellerId) throws UserMSException {
+		userService.deleteSeller(sellerId);
+		String successMessage = environment.getProperty("UserController.DELETE_SUCCESS");
+		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
 //	
 

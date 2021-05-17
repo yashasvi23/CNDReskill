@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +98,7 @@ public class UserServiceImpl implements UserService {
 			throw new UserMSException("Service.INVALID_CREDENTIALS");
 		}
 	}
+	@Override
 	public SellerDTO sellerLogin(String emailId,String password)throws UserMSException
 	{
 		Seller optional=sellerRepository.findByEmailId(emailId);
@@ -125,6 +128,18 @@ public class UserServiceImpl implements UserService {
 		{
 			throw new UserMSException("Service.INVALID_CREDENTIALS");
 		}
+	}
+	@Override
+	public void deleteBuyer(Integer buyerId) throws UserMSException {
+		Optional<Buyer> optional = buyerRepository.findById(buyerId);
+		optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
+		buyerRepository.deleteById(buyerId);
+	}
+	@Override
+	public void deleteSeller(Integer sellerId) throws UserMSException {
+		Optional<Seller> optional = sellerRepository.findById(sellerId);
+		optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
+		sellerRepository.deleteById(sellerId);
 	}
 
 }
