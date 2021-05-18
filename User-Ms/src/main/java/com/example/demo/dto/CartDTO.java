@@ -1,21 +1,32 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Buyer;
+
 
 public class CartDTO {
-	private Buyer buyerId;
+	private Integer buyerId;
+	private Integer prodId;
 	private Integer quantity;
-	public Buyer getBuyerId() {
-		return buyerId;
-	}
-	public void setBuyerId(Buyer buyerId) {
-		this.buyerId = buyerId;
-	}
 	public Integer getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
+	public Integer getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(Integer buyerId) {
+		this.buyerId = buyerId;
+	}
+	public Integer getProdId() {
+		return prodId;
+	}
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
+	@Override
+	public String toString() {
+		return "CartDTO [buyerId=" + buyerId + ", prodId=" + prodId + ", quantity=" + quantity + "]";
+	}
+	
 }

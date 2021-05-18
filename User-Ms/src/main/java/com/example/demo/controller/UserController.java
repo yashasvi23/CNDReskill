@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.dto.BuyerDTO;
+import com.example.demo.dto.CartDTO;
+import com.example.demo.dto.ProductDTO;
 import com.example.demo.dto.SellerDTO;
+import com.example.demo.dto.WishlistDTO;
 import com.example.demo.exception.UserMSException;
 import com.example.demo.service.UserService;
 
@@ -80,6 +83,53 @@ public class UserController {
 		String successMessage = environment.getProperty("UserController.DELETE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
+	@RequestMapping(value="/addWishlist" , method =RequestMethod.POST)
+	public ResponseEntity<String> addToWishList(@RequestBody WishlistDTO wishlist) throws UserMSException
+	{
+		
+			Integer id = userService.addProductToWishlist(wishlist);
+			String message=environment.getProperty("UserService.ADDED_TO_WISHLIST")+ " "+id+" "+
+			environment.getProperty("UserService.ADDED_TO_WISHLIST2");
+			new RestTemplate().getForObject("http://localhost:8200/products/"+wishlist.getProdId(),
+					ProductDTO.class);
+			return new ResponseEntity<String>(message,HttpStatus.OK);
+		
+		
+	}
+//	@RequestMapping(value="/addWishlist" , method =RequestMethod.POST)
+//	public ResponseEntity<ProductDTO> addToWishList(@RequestBody WishlistDTO wishlist) throws UserMSException
+//	{
+//		
+//			userService.addProductToWishlist(wishlist);
+//			//String message=environment.getProperty("UserService.ADDED_TO_WISHLIST")+ " "+id+" "+
+//			//environment.getProperty("UserService.ADDED_TO_WISHLIST2");
+//			ProductDTO pDTO=new RestTemplate().getForObject("http://localhost:8200/products/"+wishlist.getProdId(),
+//					ProductDTO.class);
+//			return new ResponseEntity<>(pDTO,HttpStatus.OK);
+//		
+//		
+//	}
 //	
-
+	@RequestMapping(value="/addCart" , method =RequestMethod.POST)
+	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO) throws UserMSException
+	{
+		
+		userService.addToCart(cartDTO);
+		new RestTemplate().getForObject("http://localhost:8200/products/"+cartDTO.getProdId(),
+				ProductDTO.class);	
+         String message= environment.getProperty("UserService.CART_ADDED");
+		return new ResponseEntity<>(message, HttpStatus.OK);
+		
+		
+	}
+	@RequestMapping(value = "/delete" , method=RequestMethod.DELETE)
+	public ResponseEntity<String>  deleteFromCart(@RequestBody CartDTO cartDTO)throws UserMSException
+	{
+		new RestTemplate().getForObject("http://localhost:8200/products/"+cartDTO.getProdId(),
+				ProductDTO.class);
+		userService.removeCart(cartDTO);
+		String message= environment.getProperty("UserService.REMOVE_CART");
+		return new ResponseEntity<>(message, HttpStatus.OK);
+	}
+	
 }

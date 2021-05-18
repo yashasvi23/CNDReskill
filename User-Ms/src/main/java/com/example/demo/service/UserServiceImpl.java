@@ -8,12 +8,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.BuyerDTO;
+import com.example.demo.dto.CartDTO;
 import com.example.demo.dto.SellerDTO;
+import com.example.demo.dto.WishlistDTO;
 import com.example.demo.entity.Buyer;
+import com.example.demo.entity.Cart;
 import com.example.demo.entity.Seller;
+import com.example.demo.entity.Wishlist;
 import com.example.demo.exception.UserMSException;
 import com.example.demo.repository.BuyerRepository;
+import com.example.demo.repository.CartRepository;
 import com.example.demo.repository.SellerRepository;
+import com.example.demo.repository.WishListRepository;
 import com.example.demo.validator.BuyerValidator;
 import com.example.demo.validator.SellerValidator;
 
@@ -25,7 +31,13 @@ public class UserServiceImpl implements UserService {
 	private BuyerRepository buyerRepository;
 	
 	@Autowired
+	private CartRepository cartRepository;
+	
+	@Autowired
 	private SellerRepository sellerRepository;
+	
+	@Autowired
+	private WishListRepository wishListRepository;
 	
 	@Override
 	public String reisterBuyer(BuyerDTO buyer) throws UserMSException
@@ -141,5 +153,50 @@ public class UserServiceImpl implements UserService {
 		optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
 		sellerRepository.deleteById(sellerId);
 	}
+	
+	@Override
+	public Integer addProductToWishlist(WishlistDTO wishlist) throws UserMSException
+	{
+		Optional<Buyer> opBuyer= buyerRepository.findById(wishlist.getBuyerId());
+		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
 
+		Optional<Wishlist> op= wishListRepository.findByBuyerIdAndProdId(wishlist.getBuyerId(), wishlist.getProdId());
+		if(op.isPresent()) {
+			throw new  UserMSException("UserService.ALREADY_WISHLISTED");
+		}
+		else {			
+			
+	        Wishlist wishl= new Wishlist();
+			wishl.setBuyerId(wishlist.getBuyerId());
+			wishl.setProdId(wishlist.getProdId());
+			wishListRepository.save(wishl);
+			return wishlist.getProdId();
+		}
+		
+	}
+	
+	@Override
+	public void addToCart(CartDTO cartDTO)throws UserMSException {
+
+		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
+		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+
+		Optional<Cart> optional= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
+		if(optional.isPresent()) {
+			throw new  UserMSException("UserService.ALREADY_CART");
+		}
+       Cart cart= new Cart();
+		cart.setBuyerId(cartDTO.getBuyerId());
+		cart.setProdId(cartDTO.getProdId());
+		cart.setQuantity(cartDTO.getQuantity());
+		cartRepository.save(cart);
+	}
+	@Override
+	public void removeCart(CartDTO cartDTO) throws UserMSException{
+		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
+		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+        Optional<Cart> optionalCart= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
+		Cart cart= optionalCart.orElseThrow(()-> new UserMSException("UserService.NO_SUCH_CART"));
+		cartRepository.delete(cart);
+	}
 }

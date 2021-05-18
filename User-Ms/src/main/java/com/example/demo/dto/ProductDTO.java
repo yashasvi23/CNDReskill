@@ -5,13 +5,13 @@ package com.example.demo.dto;
 public class ProductDTO {
 	private Integer prodid;
     private String productName;
-    private Float price;
-    private int stock;
+    private Integer price;
+    private Integer stock;
     private String discription;
     private String category;
-    private Long sellerId;
+    private Integer sellerId;
     private String subCategory;
-    private Long productRating;
+    private Integer productRating;
     
 
 	
@@ -22,12 +22,7 @@ public class ProductDTO {
 		this.productName = productName;
 	}
 	
-	public Float getPrice() {
-		return price;
-	}
-	public void setPrice(Float price) {
-		this.price = price;
-	}
+	
 	public int getStock() {
 		return stock;
 	}
@@ -46,11 +41,21 @@ public class ProductDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public Long getSellerId() {
+	
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+	public Integer getSellerId() {
 		return sellerId;
 	}
-	public void setSellerId(Long sellerId) {
+	public void setSellerId(Integer sellerId) {
 		this.sellerId = sellerId;
+	}
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
 	public String getSubCategory() {
 		return subCategory;
@@ -65,11 +70,12 @@ public class ProductDTO {
 	public void setProdid(Integer prodid) {
 		this.prodid = prodid;
 	}
-	public Long getProductRating() {
+	public Integer getProductRating() {
 		return productRating;
 	}
-	public void setProductRating(Long productRating) {
+	public void setProductRating(Integer productRating) {
 		this.productRating = productRating;
 	}
+	
 	
 }
