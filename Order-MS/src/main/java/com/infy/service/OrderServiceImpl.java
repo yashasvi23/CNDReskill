@@ -40,10 +40,10 @@ public class OrderServiceImpl {
 		
 	}
 	
-	public List<ProductsOrderedDTO> viewOrder()
+	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException
 	{
 
-		List<ProductsOrdered> productsOrdered = productsOrderedRepo.findAll();
+		Iterable<ProductsOrdered> productsOrdered = productsOrderedRepo.findAll();
 		List<ProductsOrderedDTO> productsOrderedDTOs = new ArrayList<ProductsOrderedDTO>();
 
 		for (ProductsOrdered pOrder :productsOrdered ) {

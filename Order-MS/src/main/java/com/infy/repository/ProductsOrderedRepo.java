@@ -8,5 +8,5 @@ import com.infy.entity.CompositeKey;
 import com.infy.entity.ProductsOrdered;
 
 public interface ProductsOrderedRepo extends CrudRepository<ProductsOrdered , CompositeKey>{
-	List<ProductsOrdered> findAll();
+	
 }
