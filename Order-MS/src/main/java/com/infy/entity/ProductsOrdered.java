@@ -2,25 +2,55 @@ package com.infy.entity;
 
 
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="productsordered")
+@IdClass(CompositeKey.class)
 public class ProductsOrdered {
 	
-	@EmbeddedId
-	private CompositeKey id;
-  
-    public CompositeKey getId() {
-		return id;
+	@Id
+	private  Integer buyerId;
+	@Id 
+	private Integer prodId;
+	
+	public Integer getBuyerId() {
+		return buyerId;
 	}
-	public void setId(CompositeKey id) {
-		this.id = id;
+
+	public void setBuyerId(Integer buyerId) {
+		this.buyerId = buyerId;
 	}
-	private String sellerId;
+
+	public Integer getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
+
+	public Integer getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(Integer sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	private Integer sellerId;
     
     private int quantity;
 	
@@ -30,18 +60,7 @@ public class ProductsOrdered {
 	
 	
 	
-	public String getSellerId() {
-		return sellerId;
-	}
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
-	}
-	public int getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+	
     
 
 }

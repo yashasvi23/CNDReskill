@@ -5,13 +5,13 @@ package com.example.demo.dto;
 public class ProductDTO {
 	private Integer prodid;
     private String productName;
-    private Integer price;
-    private Integer stock;
+    private Float price;
+    private int stock;
     private String discription;
     private String category;
-    private Integer sellerId;
+    private Long sellerId;
     private String subCategory;
-    private Integer productRating;
+    private Long productRating;
     
 
 	
@@ -22,18 +22,16 @@ public class ProductDTO {
 		this.productName = productName;
 	}
 	
-	
-	
-	public Integer getPrice() {
+	public Float getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(Float price) {
 		this.price = price;
 	}
-	public Integer getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(Integer stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	public String getDiscription() {
@@ -48,7 +46,12 @@ public class ProductDTO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
+	public Long getSellerId() {
+		return sellerId;
+	}
+	public void setSellerId(Long sellerId) {
+		this.sellerId = sellerId;
+	}
 	public String getSubCategory() {
 		return subCategory;
 	}
@@ -62,17 +65,11 @@ public class ProductDTO {
 	public void setProdid(Integer prodid) {
 		this.prodid = prodid;
 	}
-	public Integer getSellerId() {
-		return sellerId;
-	}
-	public void setSellerId(Integer sellerId) {
-		this.sellerId = sellerId;
-	}
-	public Integer getProductRating() {
+	public Long getProductRating() {
 		return productRating;
 	}
-	public void setProductRating(Integer productRating) {
+	public void setProductRating(Long productRating) {
 		this.productRating = productRating;
 	}
-		
+	
 }

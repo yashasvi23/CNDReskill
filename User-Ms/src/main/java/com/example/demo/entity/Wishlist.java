@@ -1,28 +1,33 @@
 package com.example.demo.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="wishlist")
+@IdClass(CompositeKey.class)
 public class Wishlist {
-	
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="buyer_id")
-	private Buyer buyerId;
+	@Id
+	private Integer buyerId;
+	@Id
 	private Integer prodId;
+	public Integer getBuyerId() {
+		return buyerId;
+	}
+	public void setBuyerId(Integer buyerId) {
+		this.buyerId = buyerId;
+	}
 	public Integer getProdId() {
 		return prodId;
 	}
 	public void setProdId(Integer prodId) {
 		this.prodId = prodId;
 	}
-	public Buyer getBuyerId() {
-		return buyerId;
-	}
-	public void setBuyerId(Buyer buyerId) {
-		this.buyerId = buyerId;
-	}
+	
+	
+	
 	
 
 }

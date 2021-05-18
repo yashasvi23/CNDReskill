@@ -1,0 +1,22 @@
+create schema orderDb;
+use orderDb;
+
+create table orders(
+order_id varchar(10),
+buyer_id varchar(10),
+amount integer,
+date_p date,
+address varchar(50),
+status varchar(10)
+);
+
+
+
+
+create table productsordered(
+buyer_id varchar(10),
+prod_id varchar(10),
+seller_id varchar(10),
+quantity integer,
+primary key(buyer_id,prod_id)
+);

@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.math.BigDecimal;
+
 @Entity
 @Table(name="product")
 public class Product {
@@ -15,13 +15,13 @@ public class Product {
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
 	    private Integer prodId;
 	    private String productName;
-	    private BigDecimal price;
-	    private int stock;
+	    private Integer price;
+	    private Integer stock;
 	    private String discription;
-	    private Long sellerId;
+	    private Integer sellerId;
 	    private String category;
 	    private String subCategory;
-	    private Long productRating;
+	    private Integer productRating;
 	    
 	    
 		
@@ -39,17 +39,20 @@ public class Product {
 		public void setProductName(String productName) {
 			this.productName = productName;
 		}
-		public BigDecimal getPrice() {
+		
+		
+		
+		
+		public Integer getPrice() {
 			return price;
 		}
-		public void setPrice(BigDecimal price) {
+		public void setPrice(Integer price) {
 			this.price = price;
 		}
-		
-		public int getStock() {
+		public Integer getStock() {
 			return stock;
 		}
-		public void setStock(int stock) {
+		public void setStock(Integer stock) {
 			this.stock = stock;
 		}
 		public String getDiscription() {
@@ -58,12 +61,7 @@ public class Product {
 		public void setDiscription(String discription) {
 			this.discription = discription;
 		}
-		public Long getSellerId() {
-			return sellerId;
-		}
-		public void setSellerId(Long sellerId) {
-			this.sellerId = sellerId;
-		}
+		
 		public String getCategory() {
 			return category;
 		}
@@ -76,12 +74,19 @@ public class Product {
 		public void setSubCategory(String subCategory) {
 			this.subCategory = subCategory;
 		}
-		public Long getProductRating() {
+		public Integer getSellerId() {
+			return sellerId;
+		}
+		public void setSellerId(Integer sellerId) {
+			this.sellerId = sellerId;
+		}
+		public Integer getProductRating() {
 			return productRating;
 		}
-		public void setProductRating(Long productRating) {
+		public void setProductRating(Integer productRating) {
 			this.productRating = productRating;
 		}
+		
 		
 }
 	    

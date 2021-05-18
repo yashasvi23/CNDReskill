@@ -2,9 +2,9 @@ package com.infy.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Embeddable;
 
-@Embeddable
+
+
 public class CompositeKey implements Serializable{
 	
 	/**
@@ -12,22 +12,23 @@ public class CompositeKey implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String buyerId;
-	private String prodId;
+	private Integer buyerId;
+	private Integer prodId;
 	
-	public String getBuyerId() {
+	
+
+	public Integer getBuyerId() {
 		return buyerId;
 	}
-	public void setBuyerId(String buyerId) {
+	public void setBuyerId(Integer buyerId) {
 		this.buyerId = buyerId;
 	}
-	public String getProdId() {
+	public Integer getProdId() {
 		return prodId;
 	}
-	public void setProdId(String prodId) {
+	public void setProdId(Integer prodId) {
 		this.prodId = prodId;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

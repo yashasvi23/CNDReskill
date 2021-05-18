@@ -13,22 +13,22 @@ import javax.persistence.Table;
 public class Orders {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int orderId;
-	private int buyerId;
+	private Integer orderId;
+	private Integer buyerId;
 	private float amount;
 	private LocalDate date;
 	private String address;
 	private String status;
-	public int getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
-	public void setOrderId(int orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
-	public int getBuyerId() {
+	public Integer getBuyerId() {
 		return buyerId;
 	}
-	public void setBuyerId(int buyerId) {
+	public void setBuyerId(Integer buyerId) {
 		this.buyerId = buyerId;
 	}
 	public float getAmount() {

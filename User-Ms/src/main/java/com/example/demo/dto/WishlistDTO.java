@@ -1,16 +1,27 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Buyer;
+
 
 public class WishlistDTO {
-	private Buyer buyerId;
-	
-	public Buyer getBuyerId() {
+	private Integer buyerId;
+	private Integer prodId;
+	public Integer getBuyerId() {
 		return buyerId;
 	}
-	public void setBuyerId(Buyer buyerId) {
+	public void setBuyerId(Integer buyerId) {
 		this.buyerId = buyerId;
 	}
+	public Integer getProdId() {
+		return prodId;
+	}
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
+	@Override
+	public String toString() {
+		return "WishlistDTO [buyerId=" + buyerId + ", prodId=" + prodId + "]";
+	}
 	
-
+	
+ 
 }
