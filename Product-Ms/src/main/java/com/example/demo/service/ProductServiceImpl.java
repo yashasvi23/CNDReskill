@@ -1,5 +1,4 @@
-/*package com.example.demo.service;
-
+package com.example.demo.service;
 
 import com.example.demo.entity.Product;
 import com.example.demo.repository.ProductRepository;
@@ -10,9 +9,8 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ProductServiceImpl implements ProductService {
-
-    @Autowired
+public class ProductServiceImpl implements ProductService{
+	@Autowired
     private ProductRepository productRepository;
 
     @Override
@@ -44,4 +42,5 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Long productId) {
         productRepository.deleteById(productId);
     }
-}*/
+
+}
