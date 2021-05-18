@@ -1,29 +1,30 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Product;
+import javax.persistence.EmbeddedId;
+
+import com.example.demo.entity.CompositeKey;
+
+
 
 public class SubscribedProductDTO {
-	private Integer ProId;
-	private Integer buyerId;
+	
+	
+	@EmbeddedId
+	private CompositeKey id;
+	
+	public CompositeKey getId() {
+		return id;
+	}
+	public void setId(CompositeKey id) {
+		this.id = id;
+	}
+	
 	private Integer quantity;
 	
-	public Integer getProId() {
-		return ProId;
-	}
-	public void setProId(Integer proId) {
-		ProId = proId;
-	}
-	public Integer getBuyerId() {
-		return buyerId;
-	}
-	public void setBuyerId(Integer buyerId) {
-		this.buyerId = buyerId;
-	}
 	public Integer getQuantity() {
 		return quantity;
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-
 }

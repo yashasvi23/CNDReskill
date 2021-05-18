@@ -10,6 +10,13 @@ public class Cart {
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="buyer_id")
 	private Buyer buyerId;
+	private Integer prodId;
+	public Integer getProdId() {
+		return prodId;
+	}
+	public void setProdId(Integer prodId) {
+		this.prodId = prodId;
+	}
 	private Integer quantity;
 	public Buyer getBuyerId() {
 		return buyerId;

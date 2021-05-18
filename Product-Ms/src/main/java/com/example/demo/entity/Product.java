@@ -5,12 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 import java.math.BigDecimal;
 @Entity
+@Table(name="product")
 public class Product {
 	 	@Id
 	    @GeneratedValue (strategy = GenerationType.IDENTITY)
-	    private Long Proid;
+	    private Integer prodId;
 	    private String productName;
 	    private BigDecimal price;
 	    private int stock;
@@ -18,14 +21,17 @@ public class Product {
 	    private Long sellerId;
 	    private String category;
 	    private String subCategory;
-	    private Long ProductRating;
+	    private Long productRating;
 	    
 	    
-		public Long getProid() {
-			return Proid;
+		
+		
+		
+		public Integer getProdId() {
+			return prodId;
 		}
-		public void setProid(Long proid) {
-			Proid = proid;
+		public void setProdId(Integer prodId) {
+			this.prodId = prodId;
 		}
 		public String getProductName() {
 			return productName;
@@ -71,12 +77,12 @@ public class Product {
 			this.subCategory = subCategory;
 		}
 		public Long getProductRating() {
-			return ProductRating;
+			return productRating;
 		}
 		public void setProductRating(Long productRating) {
-			ProductRating = productRating;
+			this.productRating = productRating;
 		}
-	    
+		
 }
 	    
 

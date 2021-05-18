@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import java.math.BigDecimal;
 
 public class ProductDTO {
-	private Long Proid;
+	private Long prodid;
     private String productName;
     private BigDecimal price;
     private int stock;
@@ -11,15 +11,10 @@ public class ProductDTO {
     private String category;
     private Long sellerId;
     private String subCategory;
-    private Long ProductRating;
+    private Long productRating;
     
 
-	public Long getProid() {
-		return Proid;
-	}
-	public void setProid(Long proid) {
-		Proid = proid;
-	}
+	
 	public String getProductName() {
 		return productName;
 	}
@@ -62,11 +57,17 @@ public class ProductDTO {
 	public void setSubCategory(String subCategory) {
 		this.subCategory = subCategory;
 	}
+	public Long getProdid() {
+		return prodid;
+	}
+	public void setProdid(Long prodid) {
+		this.prodid = prodid;
+	}
 	public Long getProductRating() {
-		return ProductRating;
+		return productRating;
 	}
 	public void setProductRating(Long productRating) {
-		ProductRating = productRating;
+		this.productRating = productRating;
 	}
-    
+	
 }
