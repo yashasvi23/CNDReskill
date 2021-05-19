@@ -1,0 +1,98 @@
+==============PRODUCT DB==================
+create schema ProductdB;
+use ProductdB;
+
+create table product(
+	prod_id integer primary key,
+	product_Name varchar(50) not null,
+	price integer not null,
+	stock integer not null,
+	discription varchar(300) not null,
+	seller_Id integer not null,
+	category varchar(50) not null,
+	subcategory varchar(50) not null,
+	product_rating integer not null
+);
+insert into product values(1001,'abc',100,20,'good',201,'AAA','BBB',5);
+insert into product values(1002,'bca',110,10,'good',202,'ABC','ABB',4);
+insert into product values(1003,'cab',120,15,'good',203,'BAA','CBB',3);
+insert into product values(1004,'aac',130,25,'good',204,'ACA','BCB',2);
+
+create table subscribedProduct(
+	
+        buyer_id integer,
+	prod_id integer,
+        quantity integer,
+        FOREIGN KEY (prod_id) REFERENCES product(prod_id),
+	CONSTRAINT wishlist_comp_pk PRIMARY KEY(buyer_id,prod_id)
+);
+
+======================USER DB==========================
+create schema userMs;
+use userMs;
+
+create table buyer(
+	buyer_id integer AUTO_INCREMENT,
+	name varchar(30) NOT NULL,
+	email_Id varchar(30) NOT NULL,
+	contact_number varchar(10) NOT NULL UNIQUE,
+	password varchar(70) NOT NULL,
+	is_privileged boolean ,
+	reward_points integer,
+	is_active boolean,
+	CONSTRAINT buyer_id_pk PRIMARY KEY(buyer_id)
+);
+
+insert into buyer values(1001,'Joey','joey@abc.com','9009009001','Joey@123',1,0,1);
+insert into buyer values(1002,'Monika','monika@abc.com','9009009002','Monika@123',1,10000,1);
+insert into buyer values(1003,'Arya','arya@abc.com','9009009003','Arya@123',0,50,1);
+insert into buyer values(1004,'Tyrion','tyrion@abc.com','9009009004','Tyrion@123',1,100,1);
+
+create table seller(
+	seller_id integer AUTO_INCREMENT,
+	name varchar(30) NOT NULL,
+	email_Id varchar(30) NOT NULL,
+	contact_number varchar(10) NOT NULL UNIQUE,
+	password varchar(70) NOT NULL,
+	is_active boolean,
+	CONSTRAINT seller_id_pk PRIMARY KEY(seller_id)
+);
+
+create table wishlist(
+	buyer_id integer,
+	prod_id integer,
+        FOREIGN KEY (buyer_id) REFERENCES buyer(buyer_id),
+	CONSTRAINT wishlist_comp_pk PRIMARY KEY(buyer_id,prod_id)
+);
+
+create table cart(
+	buyer_id integer,
+	prod_id integer,
+	quantity integer,
+        FOREIGN KEY (buyer_id) REFERENCES buyer(buyer_id),
+	CONSTRAINT cart_comp_pk PRIMARY KEY(buyer_id,prod_id)
+);
+
+==================ORDER DB==========================
+create schema orderDb;
+use orderDb;
+
+create table orders(
+order_id varchar(10),
+buyer_id varchar(10),
+amount integer,
+date_p date,
+address varchar(50),
+status varchar(10)
+);
+
+
+
+
+create table productsordered(
+buyer_id varchar(10),
+prod_id varchar(10),
+seller_id varchar(10),
+quantity integer,
+primary key(buyer_id,prod_id)
+);
