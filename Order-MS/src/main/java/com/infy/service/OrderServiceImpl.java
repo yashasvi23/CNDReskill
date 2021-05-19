@@ -2,6 +2,7 @@ package com.infy.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -25,19 +26,24 @@ public class OrderServiceImpl {
 	private ProductsOrderedRepo productsOrderedRepo;
 	//Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void addProduct(Orderdto order) throws OrderMsException
-	{
-		
-	}
 	
-	public void removeProduct(Orderdto order)
-	{
-		
-	}
 	
-	public void placeOrder(Orderdto order)
+	
+	
+	public Integer placeOrder(ProductsOrderedDTO pOrder) throws OrderMsException
 	{
-		
+		Optional<ProductsOrdered> po= productsOrderedRepo.findByBuyerIdAndProdId(pOrder.getBuyerId(), pOrder.getProdId());
+		if(po.isPresent()) {
+			throw new  OrderMsException("OrderService.ALREADY_ORDERED");
+		}
+		else {			
+			
+	        ProductsOrdered ordered= new ProductsOrdered();
+	        ordered.setBuyerId(pOrder.getBuyerId());
+	        ordered.setProdId(pOrder.getProdId());
+	        productsOrderedRepo.save(ordered);
+			return pOrder.getProdId();
+		}
 	}
 	
 	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException
