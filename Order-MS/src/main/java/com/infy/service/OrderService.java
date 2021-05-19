@@ -10,7 +10,10 @@ import com.infy.exception.OrderMsException;
 public interface OrderService {
 
 	
-//    public void addToCart(CartDTO cartDTO)throws OrderMsException;
-//    public void removeCart(CartDTO cartDTO) throws OrderMsException;
-	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException;;
+
+	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException;
+
+	public Integer placeOrder(ProductsOrderedDTO order)throws OrderMsException;
+	
+	
 }

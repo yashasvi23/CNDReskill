@@ -27,6 +27,7 @@ public class OrderServiceImpl {
 	private ProductsOrderedRepo productsOrderedRepo;
 	//Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+
 //	@Override
 //	public void addToCart(CartDTO cartDTO)throws OrderMsException {
 //
@@ -51,6 +52,27 @@ public class OrderServiceImpl {
 //		Cart cart= optionalCart.orElseThrow(()-> new UserMSException("UserService.NO_SUCH_CART"));
 //		cartRepository.delete(cart);
 //	}
+
+	
+	
+	
+	
+	public Integer placeOrder(ProductsOrderedDTO pOrder) throws OrderMsException
+	{
+		Optional<ProductsOrdered> po= productsOrderedRepo.findByBuyerIdAndProdId(pOrder.getBuyerId(), pOrder.getProdId());
+		if(po.isPresent()) {
+			throw new  OrderMsException("OrderService.ALREADY_ORDERED");
+		}
+		else {			
+			
+	        ProductsOrdered ordered= new ProductsOrdered();
+	        ordered.setBuyerId(pOrder.getBuyerId());
+	        ordered.setProdId(pOrder.getProdId());
+	        productsOrderedRepo.save(ordered);
+			return pOrder.getProdId();
+		}
+	}
+
 	
 	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException
 	{
