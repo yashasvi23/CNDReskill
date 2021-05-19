@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="productsOrdered")
+@Table(name="productsordered")
 @IdClass(CompositeKey.class)
 public class ProductsOrdered {
 	
