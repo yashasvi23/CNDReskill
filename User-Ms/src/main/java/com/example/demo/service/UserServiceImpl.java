@@ -47,17 +47,17 @@ public class UserServiceImpl implements UserService {
 		{
 			throw new UserMSException("Service.BUYER_ALREADY_EXISTS");
 		}
-			Buyer buyerEntity= new Buyer();
-			buyerEntity.setBuyerId(buyer.getBuyerId());
-			buyerEntity.setContactNumber(buyer.getContactNumber());
-			buyerEntity.setEmailId(buyer.getEmailId());
-			buyerEntity.setIsActive(buyer.getIsActive());
-			buyerEntity.setIsPriviliged(buyer.getIsPriviliged());
-			buyerEntity.setName(buyer.getName());
-			buyerEntity.setPassword(buyer.getPassword());
-			buyerEntity.setRewardPoints(buyer.getRewardPoints());
-			buyerRepository.save(buyerEntity);
-			return buyerEntity.getName();
+			Buyer buyer1= new Buyer();
+			buyer1.setBuyerId(buyer.getBuyerId());
+			buyer1.setContactNumber(buyer.getContactNumber());
+			buyer1.setEmailId(buyer.getEmailId());
+			buyer1.setIsActive(buyer.getIsActive());
+			buyer1.setIsPriviliged(buyer.getIsPriviliged());
+			buyer1.setName(buyer.getName());
+			buyer1.setPassword(buyer.getPassword());
+			buyer1.setRewardPoints(buyer.getRewardPoints());
+			buyerRepository.save(buyer1);
+			return buyer1.getName();
 		
 	}
 	
@@ -69,15 +69,15 @@ public class UserServiceImpl implements UserService {
 		{
 			throw new UserMSException("Service.SELLER_ALREADY_EXISTS");
 		}
-		Seller sellerEntity=new Seller();
-		sellerEntity.setContactNumber(seller.getContactNumber());
-		sellerEntity.setEmailId(seller.getEmailId());
-		sellerEntity.setIsActive(seller.getIsActive());
-		sellerEntity.setName(seller.getName());
-		sellerEntity.setPassword(seller.getPassword());
-		sellerEntity.setSellerId(seller.getSellerId());
-		sellerRepository.save(sellerEntity);
-		return sellerEntity.getName();
+		Seller seller2=new Seller();
+		seller2.setContactNumber(seller.getContactNumber());
+		seller2.setEmailId(seller.getEmailId());
+		seller2.setIsActive(seller.getIsActive());
+		seller2.setName(seller.getName());
+		seller2.setPassword(seller.getPassword());
+		seller2.setSellerId(seller.getSellerId());
+		sellerRepository.save(seller2);
+		return seller2.getName();
 	}
 	@Override
 	public BuyerDTO buyerLogin(String emailId,String password)throws UserMSException
@@ -91,16 +91,16 @@ public class UserServiceImpl implements UserService {
 		if(buyerPassword!=null)
 			if(buyerPassword.equals(password))
 			{
-				BuyerDTO bDTO = new BuyerDTO();
-				bDTO.setBuyerId(optional.getBuyerId());
-				bDTO.setContactNumber(optional.getContactNumber());
-				bDTO.setEmailId(optional.getEmailId());
-				bDTO.setIsActive(optional.getIsActive());
-				bDTO.setIsPriviliged(optional.getIsPriviliged());
-				bDTO.setName(optional.getName());
-				bDTO.setPassword(optional.getPassword());
-				bDTO.setRewardPoints(optional.getRewardPoints());
-				return bDTO;
+				BuyerDTO b = new BuyerDTO();
+				b.setBuyerId(optional.getBuyerId());
+				b.setContactNumber(optional.getContactNumber());
+				b.setEmailId(optional.getEmailId());
+				b.setIsActive(optional.getIsActive());
+				b.setIsPriviliged(optional.getIsPriviliged());
+				b.setName(optional.getName());
+				b.setPassword(optional.getPassword());
+				b.setRewardPoints(optional.getRewardPoints());
+				return b;
 			}
 			else {
 				throw new UserMSException("Service.INVALID_CREDENTIALS");
@@ -122,16 +122,16 @@ public class UserServiceImpl implements UserService {
 		if(sellerPassword!=null)
 			if(sellerPassword.equals(password))
 			{
-				SellerDTO sDTO = new SellerDTO();
-				sDTO.setSellerId(optional.getSellerId());
-				sDTO.setContactNumber(optional.getContactNumber());
-				sDTO.setEmailId(optional.getEmailId());
-				sDTO.setIsActive(optional.getIsActive());
+				SellerDTO s = new SellerDTO();
+				s.setSellerId(optional.getSellerId());
+				s.setContactNumber(optional.getContactNumber());
+				s.setEmailId(optional.getEmailId());
+				s.setIsActive(optional.getIsActive());
 				
-				sDTO.setName(optional.getName());
-				sDTO.setPassword(optional.getPassword());
+				s.setName(optional.getName());
+				s.setPassword(optional.getPassword());
 				
-				return sDTO;
+				return s;
 			}
 			else {
 				throw new UserMSException("Service.INVALID_CREDENTIALS");
@@ -144,13 +144,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteBuyer(Integer buyerId) throws UserMSException {
 		Optional<Buyer> optional = buyerRepository.findById(buyerId);
-		optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
+	Buyer b  = optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
 		buyerRepository.deleteById(buyerId);
 	}
 	@Override
 	public void deleteSeller(Integer sellerId) throws UserMSException {
 		Optional<Seller> optional = sellerRepository.findById(sellerId);
-		optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
+		Seller s = optional.orElseThrow(() -> new UserMSException("Service.USER_NOT_FOUND"));
 		sellerRepository.deleteById(sellerId);
 	}
 	
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService {
 	public Integer addProductToWishlist(WishlistDTO wishlist) throws UserMSException
 	{
 		Optional<Buyer> opBuyer= buyerRepository.findById(wishlist.getBuyerId());
-		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+		Buyer b = opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
 
 		Optional<Wishlist> op= wishListRepository.findByBuyerIdAndProdId(wishlist.getBuyerId(), wishlist.getProdId());
 		if(op.isPresent()) {
@@ -179,7 +179,7 @@ public class UserServiceImpl implements UserService {
 	public void addToCart(CartDTO cartDTO)throws UserMSException {
 
 		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
-		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+		Buyer b= opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
 
 		Optional<Cart> optional= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
 		if(optional.isPresent()) {
@@ -194,7 +194,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void removeCart(CartDTO cartDTO) throws UserMSException{
 		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
-		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+		Buyer b =opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
         Optional<Cart> optionalCart= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
 		Cart cart= optionalCart.orElseThrow(()-> new UserMSException("UserService.NO_SUCH_CART"));
 		cartRepository.delete(cart);
