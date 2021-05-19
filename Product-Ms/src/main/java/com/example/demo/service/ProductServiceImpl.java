@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public List<ProductDTO> getProductByCategory(String category) throws ProductMSException
 	{
-		List<Product> plist=productRepository.findByCategory(category);
+		List<Product> plist=productRepository.findByCategoryIgnoreCase(category);
 		if(plist.isEmpty())
 		{
 			throw new ProductMSException("Service.PRODUCTS_UNAVAILABLE");

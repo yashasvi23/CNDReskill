@@ -32,8 +32,8 @@ public class ProductController {
 	    
 	  }
 	  
-	  @RequestMapping(value="/products/{category}" , method =RequestMethod.GET)
-	  public ResponseEntity<List<ProductDTO>> getProductByCategory(@PathVariable String category) throws ProductMSException {
+	  @RequestMapping(value="/products/category/{category}" , method =RequestMethod.GET)
+	  public ResponseEntity<List<ProductDTO>> getByCategory(@PathVariable String category) throws ProductMSException {
 		  List<ProductDTO> productList = productService.getProductByCategory(category);
 			return new ResponseEntity<>(productList, HttpStatus.OK);
 	    

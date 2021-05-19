@@ -2,11 +2,13 @@ package com.infy.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 import com.infy.dto.Orderdto;
 import com.infy.dto.ProductsOrderedDTO;
@@ -25,20 +27,30 @@ public class OrderServiceImpl {
 	private ProductsOrderedRepo productsOrderedRepo;
 	//Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public void addProduct(Orderdto order) throws OrderMsException
-	{
-		
-	}
-	
-	public void removeProduct(Orderdto order)
-	{
-		
-	}
-	
-	public void placeOrder(Orderdto order)
-	{
-		
-	}
+//	@Override
+//	public void addToCart(CartDTO cartDTO)throws OrderMsException {
+//
+//		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
+//		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+//
+//		Optional<Cart> optional= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
+//		if(optional.isPresent()) {
+//			throw new  UserMSException("UserService.ALREADY_CART");
+//		}
+//        Cart cart= new Cart();
+//		cart.setBuyerId(cartDTO.getBuyerId());
+//		cart.setProdId(cartDTO.getProdId());
+//		cart.setQuantity(cartDTO.getQuantity());
+//		cartRepository.save(cart);
+//	}
+//	@Override
+//	public void removeCart(CartDTO cartDTO) throws OrderMsException{
+//		Optional<Buyer> opBuyer= buyerRepository.findById(cartDTO.getBuyerId());
+//		opBuyer.orElseThrow(()-> new UserMSException("UserService.NO_USER"));
+//        Optional<Cart> optionalCart= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
+//		Cart cart= optionalCart.orElseThrow(()-> new UserMSException("UserService.NO_SUCH_CART"));
+//		cartRepository.delete(cart);
+//	}
 	
 	public List<ProductsOrderedDTO> viewOrder() throws OrderMsException
 	{

@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface ProductRepository extends CrudRepository<Product,Integer> {
     public List<Product> findAll();
-    public List<Product> findByCategory(String category);
+    public List<Product> findByCategoryIgnoreCase(String category);
     
 }

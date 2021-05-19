@@ -26,10 +26,10 @@ public class OrderController {
 	@Autowired
 	OrderService orderService;
 	
-	@GetMapping(value = "/ProductsOrdered", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<ProductsOrderedDTO> getAllProducts() {
-		logger.info("Fetching all products");
-		return orderService.viewOrder();
-	}
+//	@GetMapping(value = "/ProductsOrdered", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<ProductsOrderedDTO> getAllProducts() {
+//		logger.info("Fetching all products");
+//		return orderService.viewOrder();
+//	}
 
 }
