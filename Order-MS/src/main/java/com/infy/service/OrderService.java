@@ -9,7 +9,7 @@ import com.infy.exception.OrderMsException;
 public interface OrderService {
 
 	
-	public void placeOrder(Orderdto order);
+	public Integer placeOrder(ProductsOrderedDTO order);
 	
 	public List<ProductsOrderedDTO> viewOrder();
 }
