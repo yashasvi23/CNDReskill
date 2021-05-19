@@ -9,7 +9,7 @@ public interface ProductService {
 	    
 	public List<ProductDTO> getAllProduct() throws ProductMSException;
 	public ProductDTO getProductById(Integer prodId) throws ProductMSException;
-	
+	public List<ProductDTO> getProductByCategory(String category) throws ProductMSException;
 	   
 }
 

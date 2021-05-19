@@ -31,4 +31,11 @@ public class ProductController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	    
 	  }
+	  
+	  @RequestMapping(value="/products/{category}" , method =RequestMethod.GET)
+	  public ResponseEntity<List<ProductDTO>> getProductByCategory(@PathVariable String category) throws ProductMSException {
+		  List<ProductDTO> productList = productService.getProductByCategory(category);
+			return new ResponseEntity<>(productList, HttpStatus.OK);
+	    
+	  }
 }

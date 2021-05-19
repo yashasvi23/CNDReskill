@@ -64,5 +64,30 @@ public class ProductServiceImpl implements ProductService{
 		
 		return pDTO;
 	}
-    
+	
+	@Override
+	public List<ProductDTO> getProductByCategory(String category) throws ProductMSException
+	{
+		List<Product> plist=productRepository.findByCategory(category);
+		if(plist.isEmpty())
+		{
+			throw new ProductMSException("Service.PRODUCTS_UNAVAILABLE");
+		}
+		List<ProductDTO> pDTOList = new ArrayList<>();
+		plist.forEach(l->{
+			ProductDTO pDTO=new ProductDTO();
+			pDTO.setProdid(l.getProdId());
+			pDTO.setCategory(l.getCategory());
+			pDTO.setDiscription(l.getDiscription());
+			pDTO.setPrice(l.getPrice());
+			pDTO.setProductName(l.getProductName());
+			pDTO.setProductRating(l.getProductRating());
+			pDTO.setSellerId(l.getSellerId());
+			pDTO.setStock(l.getStock());
+			pDTO.setSubCategory(l.getSubCategory());
+			pDTOList.add(pDTO);
+		
+		});
+		return pDTOList;
+	}
 }
