@@ -1,40 +1,32 @@
 package com.infy.entity;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
+
 import javax.persistence.Table;
 
 
 
 @Entity
 @Table(name="productsordered")
-@IdClass(CompositeKey.class)
+
 public class ProductsOrdered {
 	
-	@Id
-	private Integer buyerId;
-	@Id
-	private Integer prodId;
+	@EmbeddedId
+	private CompositeKey id;
 	
 	private Integer sellerId;
 	
 	private Integer quantity;
 
-	public Integer getBuyerId() {
-		return buyerId;
+	
+
+	public CompositeKey getId() {
+		return id;
 	}
 
-	public void setBuyerId(Integer buyerId) {
-		this.buyerId = buyerId;
-	}
-
-	public Integer getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Integer prodId) {
-		this.prodId = prodId;
+	public void setId(CompositeKey id) {
+		this.id = id;
 	}
 
 	public Integer getSellerId() {

@@ -4,9 +4,11 @@ package com.infy.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
 
 
 
+@Embeddable
 public class CompositeKey implements Serializable{
 		
 		/**

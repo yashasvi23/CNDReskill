@@ -1,37 +1,50 @@
-//package com.infy.controller;
-//
-//import java.util.List;
-//
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.core.env.Environment;
-//import org.springframework.http.HttpStatus;
-//import org.springframework.http.MediaType;
-//import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.CrossOrigin;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.client.RestTemplate;
-//
-//import com.infy.dto.Orderdto;
-//import com.infy.dto.ProductsOrderedDTO;
-//import com.infy.exception.OrderMsException;
-//import com.infy.service.OrderService;
-//
-//@RestController
-//@CrossOrigin
-//@RequestMapping
-//public class OrderController {
+package com.infy.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
+
+import com.infy.dto.ProductsOrderedDTO;
+import com.infy.exception.OrderMSException;
+import com.infy.service.OrderService;
+
+
+@RestController
+@CrossOrigin
+@RequestMapping
+public class OrderController {
 //
 //	Log logger = LogFactory.getLog(OrderController.class);
-//	@Autowired
-//	private OrderService orderService;
-//	@Autowired
-//	private Environment environment;
+	@Autowired
+	private OrderService orderService;
+	
+	
+	@PostMapping(value="/placeorder")
+	public ResponseEntity<String> placeOrder(@RequestBody ProductsOrderedDTO productsOrderedDTO) {
+		String val = new RestTemplate().getForObject("http://localhost:8200/products/"+"/product/"+productsOrderedDTO.getProdid()+"/"+productsOrderedDTO.getQuantity(), String.class);
+		String message="Unknown error occured";
+		if(val.equalsIgnoreCase("Quantity is unavailable")) {
+			return new ResponseEntity<String>(val,HttpStatus.BAD_REQUEST);
+		}
+else {
+			try {
+				message = "Order placed for "+orderService.placeOrder(productsOrderedDTO);
+				return new ResponseEntity<String>(message,HttpStatus.OK);
+			} catch (OrderMSException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+		
+	}
 //	
 //
 //
@@ -51,4 +64,4 @@
 //	}
 //
 //
-//}
+}

@@ -1,4 +1,4 @@
-//package com.infy.service;
+package com.infy.service;
 //
 //import java.util.ArrayList;
 //import java.util.List;
@@ -17,14 +17,26 @@
 ////import com.infy.repository.OrderRepository;
 //import com.infy.repository.ProductsOrderedRepo;
 //
-//@Service(value="orderService")
-//@Transactional
-//public class OrderServiceImpl {
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.infy.dto.ProductsOrderedDTO;
+import com.infy.entity.CompositeKey;
+import com.infy.entity.ProductsOrdered;
+import com.infy.exception.OrderMSException;
+import com.infy.repository.ProductsOrderedRepo;
+
+@Service(value="orderService")
+@Transactional
+public class OrderServiceImpl implements OrderService{
 ////	@Autowired
 ////	private OrderRepository orderRepository;
 //	
-//	@Autowired
-//	private ProductsOrderedRepo productsOrderedRepo;
+	@Autowired
+	private ProductsOrderedRepo prodRepo;
 //	//Logger logger = LoggerFactory.getLogger(this.getClass());
 //	
 //
@@ -88,4 +100,19 @@
 //		//logger.info("Products Ordered : {}", productsOrderedDTOs);
 //		return productsOrderedDTOs;
 //	}
-//}
+	@Override
+	public String placeOrder(ProductsOrderedDTO productsOrderedDTO) throws OrderMSException {
+		
+		prodRepo.findByIdBuyerId(productsOrderedDTO.getBuyerId()).orElseThrow(()->new OrderMSException("OrderService.No_such_buyer_exists"));
+		ProductsOrdered po = new ProductsOrdered();
+        CompositeKey newId = new CompositeKey();
+		newId.setBuyerId(productsOrderedDTO.getBuyerId());
+		newId.setProdId(productsOrderedDTO.getProdid());
+		po.setId(newId);
+        po.setSellerId(productsOrderedDTO.getSellerId());
+		po.setQuantity(productsOrderedDTO.getQuantity());
+		prodRepo.save(po);
+		String val = "Buyer ID: "+productsOrderedDTO.getBuyerId()+" and Product ID: "+productsOrderedDTO.getProdid();
+		return val;
+	}
+}
