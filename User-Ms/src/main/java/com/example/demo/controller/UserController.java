@@ -30,7 +30,7 @@ public class UserController {
 	@Autowired
 	private Environment environment;
 	
-	@RequestMapping(value="/buyerRegister" , method =RequestMethod.POST)
+	@RequestMapping(value="/buyer/buyerRegister" , method =RequestMethod.POST)
 	public ResponseEntity<String> registerBuyer(@RequestBody BuyerDTO buyer) throws UserMSException
 	{
 		
@@ -40,7 +40,7 @@ public class UserController {
 			return new ResponseEntity<String>(message,HttpStatus.OK);
 		
 	}
-	@RequestMapping(value="/sellerRegister" , method =RequestMethod.POST)
+	@RequestMapping(value="/seller/sellerRegister" , method =RequestMethod.POST)
 	public ResponseEntity<String> registerSeller(@RequestBody SellerDTO seller) throws UserMSException
 	{
 		
@@ -51,7 +51,7 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value="/sellerLogin" , method =RequestMethod.POST)
+	@RequestMapping(value="/seller/sellerLogin" , method =RequestMethod.POST)
 	public ResponseEntity<SellerDTO> sellerLogin(@RequestBody SellerDTO seller) throws UserMSException
 	{
 		
@@ -61,7 +61,7 @@ public class UserController {
 		
 		
 	}
-	@RequestMapping(value="/buyerLogin" , method =RequestMethod.POST)
+	@RequestMapping(value="/buyer/buyerLogin" , method =RequestMethod.POST)
 	public ResponseEntity<BuyerDTO> buyerLogin(@RequestBody BuyerDTO buyer) throws UserMSException
 	{
 		
@@ -83,7 +83,7 @@ public class UserController {
 		String successMessage = environment.getProperty("UserController.DELETE_SUCCESS");
 		return new ResponseEntity<>(successMessage, HttpStatus.OK);
 	}
-	@RequestMapping(value="/addWishlist" , method =RequestMethod.POST)
+	@RequestMapping(value="/wishlisht/addWishlist" , method =RequestMethod.POST)
 	public ResponseEntity<String> addToWishList(@RequestBody WishlistDTO wishlist) throws UserMSException
 	{
 		
@@ -110,7 +110,7 @@ public class UserController {
 //		
 //	}
 //	
-	@RequestMapping(value="/addCart" , method =RequestMethod.POST)
+	@RequestMapping(value="/cart/addCart" , method =RequestMethod.POST)
 	public ResponseEntity<String> addToCart(@RequestBody CartDTO cartDTO) throws UserMSException
 	{
 		
@@ -122,7 +122,7 @@ public class UserController {
 		
 		
 	}
-	@RequestMapping(value = "/delete" , method=RequestMethod.DELETE)
+	@RequestMapping(value = "/user/delete" , method=RequestMethod.DELETE)
 	public ResponseEntity<String>  deleteFromCart(@RequestBody CartDTO cartDTO)throws UserMSException
 	{
 		new RestTemplate().getForObject("http://localhost:8200/products/"+cartDTO.getProdId(),
