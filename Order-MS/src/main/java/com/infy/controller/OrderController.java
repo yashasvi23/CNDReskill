@@ -42,8 +42,8 @@ public class OrderController {
 	public ResponseEntity<String> addToOrder(@RequestBody ProductsOrderedDTO pOrder) throws OrderMsException
 	{
 		Integer id=orderService.placeOrder(pOrder);
-		String message=environment.getProperty("OrderService.ORDER_ADDED")+ ""+id+" "+
-		environment.getProperty("OrderService.ORDER_ADDED2");
+		String message=environment.getProperty("OrderController.ORDER_ADDED")+ ""+id+" "+
+		environment.getProperty("OrderController.ORDER_ADDED2");
 		new RestTemplate().getForObject("http://localhost:8200/orders/"+pOrder.getProdId(),Orderdto.class);
 		return new ResponseEntity<String>(message,HttpStatus.OK);
 	}
