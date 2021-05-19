@@ -10,18 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import com.infy.dto.Orderdto;
+//import com.infy.dto.Orderdto;
 import com.infy.dto.ProductsOrderedDTO;
 import com.infy.entity.ProductsOrdered;
 import com.infy.exception.OrderMsException;
-import com.infy.repository.OrderRepository;
+//import com.infy.repository.OrderRepository;
 import com.infy.repository.ProductsOrderedRepo;
 
-@Service
+@Service(value="orderService")
 @Transactional
 public class OrderServiceImpl {
-	@Autowired
-	private OrderRepository orderRepository;
+//	@Autowired
+//	private OrderRepository orderRepository;
 	
 	@Autowired
 	private ProductsOrderedRepo productsOrderedRepo;
