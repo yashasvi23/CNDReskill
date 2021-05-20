@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService{
 	@Override
 	public String placeOrder(ProductsOrderedDTO productsOrderedDTO) throws OrderMSException {
 		
-		prodRepo.findByIdBuyerId(productsOrderedDTO.getBuyerId()).orElseThrow(()->new OrderMSException("OrderService.No_such_buyer_exists"));
+		//prodRepo.findByIdBuyerId(productsOrderedDTO.getBuyerId()).orElseThrow(()->new OrderMSException("OrderService.No_such_buyer_exists"));
 		ProductsOrdered po = new ProductsOrdered();
         CompositeKey newId = new CompositeKey();
 		newId.setBuyerId(productsOrderedDTO.getBuyerId());

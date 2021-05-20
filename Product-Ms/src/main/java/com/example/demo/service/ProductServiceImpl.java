@@ -90,4 +90,14 @@ public class ProductServiceImpl implements ProductService{
 		});
 		return pDTOList;
 	}
+	public Boolean placeOrder(Integer productId, Integer quantity) throws ProductMSException
+	{
+		Optional<Product> optional = productRepository.findById(productId);
+		Product product = optional.orElseThrow(()->new ProductMSException("ProductService.NO_PRODUCTS_AVAILABLE"));
+		if(product.getStock()>quantity) {
+			
+			return true;
+		}
+		return false;
+	}
 }

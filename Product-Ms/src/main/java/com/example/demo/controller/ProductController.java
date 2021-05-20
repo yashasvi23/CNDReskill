@@ -38,4 +38,11 @@ public class ProductController {
 			return new ResponseEntity<>(productList, HttpStatus.OK);
 	    
 	  }
+	  
+	  @RequestMapping(value="/products/{productId}/{quantity}" , method =RequestMethod.GET)
+	  public Boolean placeOrder(@PathVariable Integer productId,@PathVariable Integer quantity) throws ProductMSException {
+		  Boolean b = productService.placeOrder(productId, quantity);
+			return b;
+	  } 
+	  
 }

@@ -27,22 +27,22 @@ public class OrderController {
 	
 	
 	@PostMapping(value="/placeorder")
-	public ResponseEntity<String> placeOrder(@RequestBody ProductsOrderedDTO productsOrderedDTO) {
-		String val = new RestTemplate().getForObject("http://localhost:8200/products/"+"/product/"+productsOrderedDTO.getProdid()+"/"+productsOrderedDTO.getQuantity(), String.class);
-		String message="Unknown error occured";
-		if(val.equalsIgnoreCase("Quantity is unavailable")) {
-			return new ResponseEntity<String>(val,HttpStatus.BAD_REQUEST);
+	public ResponseEntity<String> placeOrder(@RequestBody ProductsOrderedDTO productsOrderedDTO) throws OrderMSException{
+		System.out.println("3");
+		Boolean val = new RestTemplate().getForObject("http://localhost:8200/products/"+productsOrderedDTO.getProdid()+"/"+productsOrderedDTO.getQuantity(), Boolean.class);
+		System.out.println("4");
+		if(val==true) {
+			System.out.println("2");
+			String message = "Order placed for "+orderService.placeOrder(productsOrderedDTO);
+			return new ResponseEntity<String>(message,HttpStatus.OK);
 		}
 else {
-			try {
-				message = "Order placed for "+orderService.placeOrder(productsOrderedDTO);
-				return new ResponseEntity<String>(message,HttpStatus.OK);
-			} catch (OrderMSException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	 System.out.println("1");
+	   String message2 = "Not Found ";
+	   return new ResponseEntity<String>(message2,HttpStatus.BAD_REQUEST);
+			
 		}
-		return new ResponseEntity<String>(message,HttpStatus.BAD_REQUEST);
+		
 		
 	}
 //	

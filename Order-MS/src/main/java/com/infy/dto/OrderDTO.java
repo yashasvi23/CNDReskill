@@ -8,8 +8,8 @@ public class OrderDTO {
 	private Integer buyerId;
 	private Integer amount;
 	private LocalDate date;
-	private Integer address;
-	private Integer  status;
+	private String address;
+	private String  status;
 	public Integer getOrderId() {
 		return orderId;
 	}
@@ -34,17 +34,18 @@ public class OrderDTO {
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
-	public Integer getAddress() {
+	public String getAddress() {
 		return address;
 	}
-	public void setAddress(Integer address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Integer getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(Integer status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
+	
 
 }
