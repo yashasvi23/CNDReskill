@@ -13,8 +13,10 @@ import com.example.demo.dto.SellerDTO;
 import com.example.demo.dto.WishlistDTO;
 import com.example.demo.entity.Buyer;
 import com.example.demo.entity.Cart;
+
 import com.example.demo.entity.Seller;
 import com.example.demo.entity.Wishlist;
+
 import com.example.demo.exception.UserMSException;
 import com.example.demo.repository.BuyerRepository;
 import com.example.demo.repository.CartRepository;
@@ -198,5 +200,15 @@ public class UserServiceImpl implements UserService {
         Optional<Cart> optionalCart= cartRepository.findByBuyerIdAndProdId(cartDTO.getBuyerId(), cartDTO.getProdId());
 		Cart cart= optionalCart.orElseThrow(()-> new UserMSException("UserService.NO_SUCH_CART"));
 		cartRepository.delete(cart);
+	}
+	public Boolean isBuyer(Integer buyerId) throws UserMSException
+	{
+		Optional<Buyer> optional = buyerRepository.findById(buyerId);
+		Buyer b = optional.orElseThrow(()->new UserMSException("UserService.NO_BUYER_FOUND"));
+		if(b!=null) {
+			
+			return true;
+		}
+		return false;
 	}
 }

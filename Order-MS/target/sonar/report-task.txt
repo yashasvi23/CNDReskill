@@ -1,0 +1,7 @@
+organization=yashasvi23
+projectKey=com.infy:OrderMs
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.20278
+dashboardUrl=https://sonarcloud.io/dashboard?id=com.infy%3AOrderMs
+ceTaskId=AXmKt9rM_qivUHf3xoaY
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AXmKt9rM_qivUHf3xoaY

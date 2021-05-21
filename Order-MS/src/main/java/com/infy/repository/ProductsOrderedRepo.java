@@ -11,5 +11,6 @@ public interface ProductsOrderedRepo extends CrudRepository<ProductsOrdered, Com
 	
 	Optional<ProductsOrdered> findByIdProdId(Integer prodId);
 	Optional<ProductsOrdered> findByIdBuyerId(Integer buyerId);
+	
 
 }

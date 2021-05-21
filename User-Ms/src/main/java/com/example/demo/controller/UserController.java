@@ -17,6 +17,7 @@ import com.example.demo.dto.CartDTO;
 import com.example.demo.dto.ProductDTO;
 import com.example.demo.dto.SellerDTO;
 import com.example.demo.dto.WishlistDTO;
+
 import com.example.demo.exception.UserMSException;
 import com.example.demo.service.UserService;
 
@@ -131,5 +132,10 @@ public class UserController {
 		String message= environment.getProperty("UserService.REMOVE_CART");
 		return new ResponseEntity<>(message, HttpStatus.OK);
 	}
+	@RequestMapping(value="/buyer/buyer/{buyerId}" , method =RequestMethod.GET)
+	  public Boolean placeOrder(@PathVariable Integer buyerId) throws UserMSException {
+		  Boolean b = userService.isBuyer(buyerId);
+			return b;
+	  } 
 	
 }

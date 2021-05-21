@@ -16,6 +16,7 @@ public interface UserService {
 	public Integer addProductToWishlist(WishlistDTO wishlist) throws UserMSException;
 	public void addToCart(CartDTO cartDTO)throws UserMSException;
 	public void removeCart(CartDTO cartDTO) throws UserMSException;
+	public Boolean isBuyer(Integer buyerId) throws UserMSException;
 	
 
 }
